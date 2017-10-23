@@ -2,6 +2,8 @@
 Chrome Extension - makes Websense Mail filtering IT job easier
 Works fine so far. Official version already published in Chrome Web Store under the name Forcepoint PreConfig: https://chrome.google.com/webstore/search/forcepoint%20preconfig?hl=en-US
 
+User needs account in https://admin.websense.net/portal
+
 This extension serves as a beginner's template in Chrome Extension making.
 Utilizes badge, popup, etc.
 The function of this extension is to:
