@@ -1,0 +1,126 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+  <head>
+    <title>Settings</title>
+    <link rel="stylesheet" type="text/css" href="popup.css">
+    <script src="jquery-3.2.1.min.js"></script> <!-- JQuery before popup.js, important! -->
+    <script src="popup.js"></script>
+  </head>
+  <body style="width:600px; height:450px">
+      <h1>Welcome to Setup</h1>
+      <table width="100%">
+        <tr>
+            <td>
+                Quarantined Messages
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Date Sent:    
+            </td>
+            <td>
+                Last Seven Days
+            </td>
+        </tr>         
+        <tr>
+            <td>
+                Results per Page:    
+            </td>
+            <td>
+                200
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Default Action on Results set to:    
+            </td>
+            <td>
+                DELETED
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Search Timer Loop:    
+            </td>
+            <td>
+                <input id="SearchInterval"> Min(s) <button id="UpdateSearchInterval">Update</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Title Countdown Rate:    
+            </td>
+            <td>
+                <input id="CountdownRate"> Second(s) <button id="UpdateCoundownRate">Update</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Total Results:    
+            </td>
+            <td>
+                <div id="messagecount"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Last Update Time:    
+            </td>
+            <td>
+                <div id="updatetime"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Current Time:    
+            </td>
+            <td>
+                <div id="currenttime"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Last Updated (mins ago):    
+            </td>
+            <td>
+                <div id="updateperiod"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Search Sender:
+                <input id="SearchEmailFrom">
+            </td>
+            <td>
+                <button id="CheckSearchEmailFrom">Check</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Search Subject:
+                <input id="SearchSubject">
+            </td>
+            <td>
+                <button id="CheckSubject">Check</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Search Issue:
+                <input id="SearchIssue">
+            </td>
+            <td>
+                <button id="CheckIssue">Check</button>
+            </td>
+        </tr>
+      </table>
+  </body>
+</html>
+
