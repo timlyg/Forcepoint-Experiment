@@ -8,7 +8,7 @@ document.getElementById("StartDateOptions").value = "week";
 document.getElementById("DisplayLimit").value = "200";
 
 var loopMins = 10;          // this is the default value for search interval in mins
-var countdownSecs = 60;     // this is the default value for Title Countdown rate in secs.
+var countdownSecs = 1;     // this is the default value for Title Countdown rate in secs.
 
 document.title = " MC: ";
 
@@ -34,9 +34,9 @@ function KillOldSessionClick () {
 function ClickLogOn () {
     // Chrome not able to take autofilled password fill in javascript form submit. Could be a security measure.
     // this matter was discussed in https://stackoverflow.com/questions/35049555/chrome-autofill-autocomplete-no-value-for-password/46433610#46433610
-//    document.getElementById("login_username").value = "your@email.com";
-//    document.getElementById("login_password").value = "yourpassword";
-//    document.querySelector("#login_form [type='submit']:not([disabled])").click();
+    document.getElementById("login_username").value = "tlaw@solomonpage.com";
+    document.getElementById("login_password").value = "8477A=/-d2Vnt#tL@.Ub";
+    document.querySelector("#login_form [type='submit']:not([disabled])").click();
 }
 
 
@@ -155,6 +155,24 @@ chrome.runtime.onMessage.addListener(
         };        
         
         ListOfChecks = $("span[id*='_issue']:Contains('" + stringvalue + "')");
+        selected = 0;
+        notselected = 0;            // some selection may have already been deleted.
+        for (i=0; i<ListOfChecks.length; i++) {
+            try {
+                ListOfChecks[i].parentElement.parentElement.querySelector("input[type='checkbox']").click();
+                selected++;
+            }
+            catch(error) {
+                notselected++;
+            }
+        }
+        alert(selected + " selected, " + notselected + " not selected.");
+    }
+    else if (request.greeting == "CheckIssues") {                                                                           // Checks Issues: spam, virus, phishing, threatseeker, Action=released
+        jQuery.expr[':'].Contains = function(a,i,m){                                    // this creates a case-insensitive version of JQUERY :contains
+            return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;       // reference: https://stackoverflow.com/questions/187537/is-there-a-case-insensitive-jquery-contains-selector
+        };        
+        ListOfChecks = $("span[id*='_issue']:Contains('spam'),span[id*='_issue']:Contains('virus'),span[id*='_issue']:Contains('phishing'),span[id*='_issue']:Contains('threatseeker'),div[id*='_processed']:Contains('released')");   // OR matching
         selected = 0;
         notselected = 0;            // some selection may have already been deleted.
         for (i=0; i<ListOfChecks.length; i++) {
