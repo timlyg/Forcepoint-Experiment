@@ -35,7 +35,7 @@ function ClickLogOn () {
     // Chrome not able to take autofilled password fill in javascript form submit. Could be a security measure.
     // this matter was discussed in https://stackoverflow.com/questions/35049555/chrome-autofill-autocomplete-no-value-for-password/46433610#46433610
     document.getElementById("login_username").value = "tlaw@solomonpage.com";
-    document.getElementById("login_password").value = "8477A=/-d2Vnt#tL@.Ub";
+    document.getElementById("login_password").value = "8477A=/-d2Vnt#tL@.Ub";   // Encrypted password goes here (check saved password in browser for encrypted password)
     document.querySelector("#login_form [type='submit']:not([disabled])").click();
 }
 
@@ -175,9 +175,14 @@ chrome.runtime.onMessage.addListener(
         ListOfChecks = $("span[id*='_issue']:Contains('spam'),span[id*='_issue']:Contains('virus'),span[id*='_issue']:Contains('phishing'),span[id*='_issue']:Contains('threatseeker'),div[id*='_processed']:Contains('released')");   // OR matching
         selected = 0;
         notselected = 0;            // some selection may have already been deleted.
+        var checkboxValue;
         for (i=0; i<ListOfChecks.length; i++) {
             try {
-                ListOfChecks[i].parentElement.parentElement.querySelector("input[type='checkbox']").click();
+                if (checkboxValue != ListOfChecks[i].parentElement.parentElement.querySelector("input[type='checkbox']").value) {   // Fixes possible duplicate records sent to
+                                                                                                                                    // ListOfChecks array, e.g. a record                                        // with both threatseeker & released will be counted twice
+                    ListOfChecks[i].parentElement.parentElement.querySelector("input[type='checkbox']").click();
+                }
+                checkboxValue = ListOfChecks[i].parentElement.parentElement.querySelector("input[type='checkbox']").value;
                 selected++;
             }
             catch(error) {
